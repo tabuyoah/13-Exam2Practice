@@ -44,9 +44,9 @@ def main():
     run_test_append_string()
     run_test_double()
     run_test_shrink()
-    run_test_double_then_shrink()
+    #run_test_double_then_shrink()
     run_test_reset()
-    # run_test_steal()
+    run_test_steal()
     # run_test_get_history()
     # run_test_combined_box()
 
@@ -168,8 +168,7 @@ class Box(object):
         #       Read_this_ONLY_when_asked_Part_2.txt
         #    and complete your work on the problem.
         # ---------------------------------------------------------------------
-        s = additional_contents
-        d = self.contents + s
+        d = self.contents + additional_contents
         r = len(d) - self.volume
         s = ''
         l = ''
@@ -358,12 +357,10 @@ class Box(object):
         # ---------------------------------------------------------------------
         s = self.double()
         self.shrink(new_volume)
-        if len(s) > new_volume:
-            return new_volume - len(s)
-        if len(s) < new_volume:
-            return len(s) - new_volume
-        else:
+        if new_volume > len(s):
             return 0
+        if new_volume < len(s):
+            return len(s) - self.volume
 
 
 
@@ -421,11 +418,8 @@ class Box(object):
         # FOR FULL CREDIT, YOUR SOLUTION MUST BE NO MORE THAN
         #    ** TWO **   LINES OF CODE.
         #######################################################################
-        d = other_box
-        for k in range(self.volume):
-            self.contents = self.contents + other_box[k]
-        for k in range(len(other_box) - self.volume):
-            other_box = other_box
+        self.append_string(other_box.contents)
+
 
     def get_history(self):
         """
