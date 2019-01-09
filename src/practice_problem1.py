@@ -44,11 +44,11 @@ def main():
     run_test_append_string()
     run_test_double()
     run_test_shrink()
-    #run_test_double_then_shrink()
+    run_test_double_then_shrink()
     run_test_reset()
     run_test_steal()
-    # run_test_get_history()
-    # run_test_combined_box()
+    run_test_get_history()
+    run_test_combined_box()
 
 
 ###############################################################################
@@ -108,6 +108,8 @@ class Box(object):
 
         self.contentsoriginal = contents
         self.volumeoriginal = volume
+
+        self.history = contents
 
         if len(self.contents) > volume:
             self.contents = ''
@@ -296,7 +298,6 @@ class Box(object):
             for k in range(v):
                 s = s + d[k]
 
-
         for k in range(len(d) - v):
             l = l + d[v + k]
 
@@ -347,7 +348,7 @@ class Box(object):
           :type new_volume: int
         """
         # ---------------------------------------------------------------------
-        # TODO: 6. Implement and test this function.
+        # DONE: 6. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -355,12 +356,8 @@ class Box(object):
         #    DIFFICULTY:      5
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
-        s = self.double()
-        self.shrink(new_volume)
-        if new_volume > len(s):
-            return 0
-        if new_volume < len(s):
-            return len(s) - self.volume
+        return len(self.double()) + len(self.shrink(new_volume))
+
 
 
 
@@ -382,8 +379,11 @@ class Box(object):
         #    DIFFICULTY:      4
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
+
+
         self.contents = self.contentsoriginal
         self.volume = self.volumeoriginal
+
         if len(self.contents) > self.volume:
             self.contents = ''
 
@@ -406,7 +406,7 @@ class Box(object):
           :type other_box: Box
         """
         # ---------------------------------------------------------------------
-        # TODO: 8. Implement and test this function.
+        # DONE: 8. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -418,8 +418,8 @@ class Box(object):
         # FOR FULL CREDIT, YOUR SOLUTION MUST BE NO MORE THAN
         #    ** TWO **   LINES OF CODE.
         #######################################################################
-        self.append_string(other_box.contents)
-
+        a = self.append_string(other_box.contents)
+        other_box.contents = a
 
     def get_history(self):
         """
@@ -459,6 +459,10 @@ class Box(object):
         #    DIFFICULTY:      6
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
+        a = []
+        a = a + self.history
+        self.history = a
+        return self.history
 
     def combined_box(self, other_box):
         """
@@ -478,7 +482,7 @@ class Box(object):
           :type other_box: Box
         """
         # ---------------------------------------------------------------------
-        # TODO: 10. Implement and test this function.
+        # DONE: 10. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -486,6 +490,9 @@ class Box(object):
         #    DIFFICULTY:      4
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
+        contents = self.contents + other_box.contents
+        volume = self.volume + other_box.volume
+        return Box(contents,volume)
 
 
 ###############################################################################
