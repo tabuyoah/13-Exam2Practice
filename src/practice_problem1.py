@@ -109,7 +109,7 @@ class Box(object):
         self.contentsoriginal = contents
         self.volumeoriginal = volume
 
-        self.history = contents
+        self.history = []
 
         if len(self.contents) > volume:
             self.contents = ''
@@ -380,12 +380,18 @@ class Box(object):
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
 
+        a = [self.contents]
+
+
 
         self.contents = self.contentsoriginal
         self.volume = self.volumeoriginal
 
         if len(self.contents) > self.volume:
             self.contents = ''
+            
+        self.history = self.history + a
+
 
     def steal(self, other_box):
         """
@@ -459,9 +465,7 @@ class Box(object):
         #    DIFFICULTY:      6
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
-        a = []
-        a = a + self.history
-        self.history = a
+
         return self.history
 
     def combined_box(self, other_box):
