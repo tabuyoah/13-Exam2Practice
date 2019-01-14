@@ -389,7 +389,7 @@ class Box(object):
 
         if len(self.contents) > self.volume:
             self.contents = ''
-            
+
         self.history = self.history + a
 
 
