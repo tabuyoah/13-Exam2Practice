@@ -382,8 +382,6 @@ class Box(object):
 
         a = [self.contents]
 
-
-
         self.contents = self.contentsoriginal
         self.volume = self.volumeoriginal
 
@@ -457,7 +455,7 @@ class Box(object):
           #   h is now ['GoodGo', 'GoodBye']
         """
         # ---------------------------------------------------------------------
-        # TODO: 9. Implement and test this function.
+        # DONE: 9. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
